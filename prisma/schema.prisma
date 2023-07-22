@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id               Int     @id @default(autoincrement())
+  name             String?
+  cnpj             String  @unique
+  quantityEmployee String?
+  email            String
+  cep              String
+  phone            String
+  road             String
+  city             String
+  state            String
+
+  jobs Job[]
+
+  @@map("companies")
+}
+
+model Stack {
+  id         Int  @id @default(autoincrement())
+  employeeId Int
+  Job        Job? @relation(fields: [jobId], references: [id])
+  jobId      Int?
+
+  @@map("stacks")
+}
+
+model Job {
+  id        Int    @id @default(autoincrement())
+  title     String
+  companyId Int?
+
+  stacks  Stack[]
+  company Company? @relation(fields: [companyId], references: [id])
+
+  @@map("jobs")
+}
