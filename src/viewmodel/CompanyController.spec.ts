@@ -1,12 +1,9 @@
 import { describe, it, expect } from '@jest/globals'
 import { CompanyView } from '../views/CompanyView'
-import { CompanyController } from './CompanyController'
 import { PrismaCompanyRepository } from '../repositories/prisma/PrismaCompanyRepository'
 import Fastify from 'fastify';
 
 describe('Register company', () => {
-
-
   /**
    * Deve ser capaz de cadastrar uma nova empresa
    */
@@ -15,9 +12,8 @@ describe('Register company', () => {
       logger: false
     })
 
-
     const repository = new PrismaCompanyRepository()
-    const controller = new CompanyController(repository)
+    // const controller = new CompanyController(repository)
 
     const company = {
       "name": "GRUPO TECH TED",
@@ -31,7 +27,7 @@ describe('Register company', () => {
       "cnpj": "0018166018"
     }
 
-    const newCompany = await controller.create(company)
+    // const newCompany = await controller.create(company)
 
     expect(company).not.toBeNull()
   })

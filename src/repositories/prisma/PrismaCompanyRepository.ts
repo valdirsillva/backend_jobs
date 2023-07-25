@@ -1,4 +1,4 @@
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../views/lib/prisma";
 import { Company, CompanyRepository } from "../CompanyRepository";
 
 export class PrismaCompanyRepository implements CompanyRepository {
@@ -24,17 +24,7 @@ export class PrismaCompanyRepository implements CompanyRepository {
 
   async create(data: Company): Promise<Company | {}> {
     const result = await prisma.company.create({
-      data: {
-        name: data.name,
-        cnpj: data.cnpj,
-        quantityEmployee: data.quantityEmployee,
-        email: data.email,
-        cep: data.cep,
-        phone: data.phone,
-        city: data.city,
-        road: data.road,
-        state: data.state,
-      },
+      data: { ...data },
     });
     return result;
   }

@@ -1,6 +1,6 @@
 // import * as dotenv from 'dotenv'
 import Fastify from "fastify";
-import { routes } from './routes/company.route';
+import { routes } from './views/routes/company.route';
 
 // dotenv.config()
 
