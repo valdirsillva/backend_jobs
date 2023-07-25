@@ -1,9 +1,9 @@
 -- CreateTable
-CREATE TABLE `employees` (
+CREATE TABLE `companies` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NULL,
     `cnpj` VARCHAR(191) NOT NULL,
-    `quantityEmployee` INTEGER NULL,
+    `quantityEmployee` VARCHAR(191) NULL,
     `email` VARCHAR(191) NOT NULL,
     `cep` VARCHAR(191) NOT NULL,
     `phone` VARCHAR(191) NOT NULL,
@@ -11,16 +11,7 @@ CREATE TABLE `employees` (
     `city` VARCHAR(191) NOT NULL,
     `state` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `employees_cnpj_key`(`cnpj`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `stacks` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `employeeId` INTEGER NOT NULL,
-    `jobId` INTEGER NULL,
-
+    UNIQUE INDEX `companies_cnpj_key`(`cnpj`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -28,9 +19,12 @@ CREATE TABLE `stacks` (
 CREATE TABLE `jobs` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
+    `companyId` INTEGER NOT NULL,
+    `jobQuantity` INTEGER NOT NULL,
+    `stacks` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `stacks` ADD CONSTRAINT `stacks_jobId_fkey` FOREIGN KEY (`jobId`) REFERENCES `jobs`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `jobs` ADD CONSTRAINT `jobs_companyId_fkey` FOREIGN KEY (`companyId`) REFERENCES `companies`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

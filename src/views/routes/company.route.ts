@@ -1,7 +1,10 @@
 import { FastifyInstance } from 'fastify';
-import { CompanyViewModel } from "../../viewmodel/CompanyViewModel";
-import { CompanyView } from '../CompanyView';
+import { JobModel } from '../../models/Job';
 import { CompanyModel } from '../../models/Company';
+import { JobViewModel } from '../../viewmodel/JobViewModel';
+import { CompanyView } from '../CompanyView';
+import { JobView } from '../../views/JobView'
+import { CompanyViewModel } from "../../viewmodel/CompanyViewModel";
 
 export async function routes(app: FastifyInstance) {
   const instanceCompany = {
@@ -16,10 +19,22 @@ export async function routes(app: FastifyInstance) {
     state: ''    
   }
 
-  const repository = new CompanyModel(instanceCompany)
-  const controller = new CompanyViewModel(repository)
-  const view = new CompanyView(controller)
+  const instanceJob = {
+    title: '',
+    companyId: 0,
+    jobQuantity: 0,
+    stacks: '',
+  }
+  const companyModel = new CompanyModel(instanceCompany) 
+  const controllerCompany = new CompanyViewModel(companyModel)
+  const viewCompany = new CompanyView(controllerCompany)
 
-  app.get('/companies', view.get.bind(view))
-  app.post('/create', view.create.bind(view))
+  const jobModel = new JobModel(instanceJob)
+  const controllerJob = new JobViewModel(jobModel)
+  const viewJob = new JobView(controllerJob)
+
+  app.get('/companies', viewCompany.get.bind(viewCompany))
+  app.post('/companies/create', viewCompany.create.bind(viewCompany))
+
+  app.post('/job/create', viewJob.create.bind(viewJob))
 }

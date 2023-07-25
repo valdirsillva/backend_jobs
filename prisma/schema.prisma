@@ -31,22 +31,13 @@ model Company {
   @@map("companies")
 }
 
-model Stack {
-  id         Int  @id @default(autoincrement())
-  employeeId Int
-  Job        Job? @relation(fields: [jobId], references: [id])
-  jobId      Int?
-
-  @@map("stacks")
-}
-
 model Job {
-  id        Int    @id @default(autoincrement())
-  title     String
-  companyId Int?
-
-  stacks  Stack[]
-  company Company? @relation(fields: [companyId], references: [id])
+  id          Int     @id @default(autoincrement())
+  title       String
+  companyId   Int
+  jobQuantity Int
+  company     Company @relation(fields: [companyId], references: [id])
+  stacks      String
 
   @@map("jobs")
 }

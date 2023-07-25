@@ -13,83 +13,86 @@ export interface CompanyProps {
 }
 
 export class CompanyModel {
-  
+  private props: CompanyProps;
+
   private repositoryCompany: PrismaCompanyRepository;
 
   constructor(props: CompanyProps) {
     this.repositoryCompany = new PrismaCompanyRepository()
+
+    this.props = { ... props }
   }
 
   public set name(name: string) {
-    this.name = name
+    this.props.name = name
   }
 
   public set quantityEmployee(quantityEmployee: string) {
-    this.quantityEmployee = quantityEmployee;
+    this.props.quantityEmployee = quantityEmployee;
   }
 
   public set email(email: string) {
-    this.email = email;
+    this.props.email = email;
   }
 
   public set cep(cep: string){
-    this.cep = cep;
+    this.props.cep = cep;
   }
 
   public set phone(phone: string){
-    this.phone = phone;
+    this.props.phone = phone;
   }
 
   public set city(city: string){
-    this.city = city;
+    this.props.city = city;
   }
 
   public set state(state: string){
-    this.state = state;
+    this.props.state = state;
   }
 
   public set road(road: string){
-    this.road = road;
+    this.props.road = road;
   }
 
   public set cnpj(cnpj: string){
-    this.cnpj = cnpj;
+    this.props.cnpj = cnpj;
   }
 
   public get name(): string {
-    return this.name;
+    return this.props.name;
   }
 
   public get quantityEmployee(): string | number {
-    return this.quantityEmployee;
+    return this.props.quantityEmployee;
   }
 
   public get email() {
-    return this.email;
+    return this.props.email;
   } 
 
   public get cep(){
-   return this.cep;
+   return this.props.cep;
   }
 
   public get phone(){
-    return this.phone;
+    return this.props.phone;
   }
 
   public get city(){
-    return this.city;
+    return this.props.city;
   }
 
   public get state(){
-    return this.state;
+    return this.props.state;
   }
 
   public get road(){
-    return this.road;
+    return this.props.road;
   }
 
   public get cnpj(){
-    return this.cnpj;
+    return this.props.cnpj;
   }
 
   public save(data: CompanyProps) {
