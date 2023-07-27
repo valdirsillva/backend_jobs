@@ -3,17 +3,24 @@ import { Company, CompanyRepository } from "../CompanyRepository";
 
 export class PrismaCompanyRepository implements CompanyRepository {
   async checkCnpj(data: Company) {
-    const result = await prisma.company.findUnique({
-      where: {
-        cnpj: data.cnpj
-      },
-      select: {
-        cnpj: true
-      },
-    })
+    try {
+      const result = await prisma.company.findUnique({
+        where: {
+          cnpj: data.cnpj
+        },
+        select: {
+          cnpj: true
+        },
+      })
+  
+      if (result?.cnpj != null) {
+        throw new Error("O CNPJ informado já está vinculado a uma outra empresa")
+      }
+      
+      return false
 
-    if (result?.cnpj != null) {
-      throw new Error("O CNPJ informado já está vinculado a uma outra empresa")
+    } catch(err: any) {
+      return true
     }
   }
 

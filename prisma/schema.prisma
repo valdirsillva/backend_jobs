@@ -1,13 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
-
-// generator erd {
-//   provider = "prisma-erd-generator"
-// }
 
 datasource db {
   provider = "mysql"
@@ -25,19 +18,33 @@ model Company {
   road             String
   city             String
   state            String
-
-  jobs Job[]
+  description_text String
+  Job              Job[]
 
   @@map("companies")
 }
 
 model Job {
-  id          Int     @id @default(autoincrement())
-  title       String
-  companyId   Int
-  jobQuantity Int
-  company     Company @relation(fields: [companyId], references: [id])
-  stacks      String
+  id            Int     @id @default(autoincrement())
+  job_title     String
+  job_companyId Int
+  job_quantity  String
+  company       Company @relation(fields: [job_companyId], references: [id])
+  technologies  String // linguagens de programação
+  salary        String // salario 
+  modality      String // modalidade
+  seniority     String // senioridade
+  requirements  String // requisitos
+  details       String // detalhes da vaga
 
   @@map("jobs")
+}
+
+model User {
+  id             Int     @id @default(autoincrement())
+  email          String  @unique
+  password       String
+  password_reset String?
+
+  @@map("users")
 }

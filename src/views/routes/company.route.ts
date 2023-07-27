@@ -16,14 +16,20 @@ export async function routes(app: FastifyInstance) {
     phone: '',
     city: '',
     road: '',
-    state: ''    
+    state: '',
+    description_text: ''    
   }
 
   const instanceJob = {
-    title: '',
-    companyId: 0,
-    jobQuantity: 0,
-    stacks: '',
+    job_title: '',
+    job_companyId: 0,
+    job_quantity: '',
+    technologies: '',
+    salary: '',
+    modality: '',
+    seniority: '',
+    requirements: '',
+    details: '',
   }
   const companyModel = new CompanyModel(instanceCompany) 
   const controllerCompany = new CompanyViewModel(companyModel)
@@ -36,5 +42,9 @@ export async function routes(app: FastifyInstance) {
   app.get('/companies', viewCompany.get.bind(viewCompany))
   app.post('/companies/create', viewCompany.create.bind(viewCompany))
 
+  app.get('/jobs', viewJob.get.bind(viewJob))
   app.post('/job/create', viewJob.create.bind(viewJob))
+
+  return app;
+
 }

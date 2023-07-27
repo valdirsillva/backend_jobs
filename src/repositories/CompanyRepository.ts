@@ -8,7 +8,8 @@ export interface Company {
   phone: string;
   city: string;
   road: string;
-  state: string
+  state: string;
+  description_text: string;
 }
 
 export interface CompanyRepository {

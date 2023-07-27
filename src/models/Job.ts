@@ -1,10 +1,15 @@
 import { PrismaJobRepository } from "../repositories/prisma/PrismaJobRepository";
 
 export interface JobProps {
-  title: string;
-  stacks: string;
-  companyId: number;
-  jobQuantity: number;
+  job_title: string;
+  job_companyId: number;
+  job_quantity: string;
+  technologies: string;
+  salary: string;
+  modality: string;
+  seniority: string;
+  requirements: string;
+  details: string;
 }
 
 export class JobModel {
@@ -17,36 +22,76 @@ export class JobModel {
     this.props = { ...props }
   }
 
-  public set title(title: string) {
-    this.props.title = title;
+  public set jobTitle(title: string) {
+    this.props.job_title = title;
   }
 
-  public set stacks(stacks: string) {
-    this.props.stacks = stacks;
+  public set tecnologies(tecnologies: string) {
+    this.props.technologies = tecnologies;
   } 
 
-  public set companyId(companyId: number) {
-    this.props.companyId = companyId;
+  public set jobCompanyId(companyId: number) {
+    this.props.job_companyId = companyId;
   }
 
-  public set jobQuantity(jobQuantity: number) {
-    this.props.jobQuantity = jobQuantity;
+  public set jobQuantity(jobQuantity: string) {
+    this.props.job_quantity = jobQuantity;
   }
 
-  public get title() {
-    return this.props.title;
+  public set salary(salary: string) {
+    this.props.salary = salary
   }
 
-  public get stacks() {
-    return this.props.stacks;
+  public set modality(modality: string) {
+    this.props.modality = modality
+  }
+
+  public set seniority(seniority: string) {
+    this.props.seniority = seniority;
+  }
+
+  public set requirements(requirement: string) {
+    this.props.requirements = requirement;
+  }
+
+  public set details(detail: string) {
+    this.props.details = detail;
+  }
+
+  public get jobTitle() {
+    return this.props.job_title;
+  }
+
+  public get tecnologies() {
+    return this.props.technologies;
   } 
 
-  public get companyId() {
-    return this.props.companyId;
+  public get jobCompanyId() {
+    return this.props.job_companyId;
   }
 
   public get jobQuantity() {
-    return this.props.jobQuantity;
+    return this.props.job_quantity;
+  }
+
+  public get salary() {
+    return this.props.salary;
+  }
+
+  public get modality() {
+    return this.props.modality;
+  }
+
+  public get seniority() {
+    return this.props.seniority;
+  }
+
+  public get requirements() {
+    return this.props.requirements;
+  }
+
+  public get details() {
+    return this.props.details;
   }
 
   public save(data: JobProps) {

@@ -10,7 +10,10 @@ export interface CompanyProps {
   road: string;
   state: string;
   cnpj: string;
+  description_text: string;
 }
+
+
 
 export class CompanyModel {
   private props: CompanyProps;
@@ -59,6 +62,10 @@ export class CompanyModel {
     this.props.cnpj = cnpj;
   }
 
+  public set description_text(description_text: string){
+    this.props.description_text = description_text;
+  }
+
   public get name(): string {
     return this.props.name;
   }
@@ -93,6 +100,10 @@ export class CompanyModel {
 
   public get cnpj(){
     return this.props.cnpj;
+  }
+
+  public get description_text(){
+    return this.props.description_text;
   }
 
   public save(data: CompanyProps) {

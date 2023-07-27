@@ -1,39 +1,58 @@
-import { describe, it, expect } from '@jest/globals'
-import { CompanyView } from '../views/CompanyView'
-import { PrismaCompanyRepository } from '../repositories/prisma/PrismaCompanyRepository'
-import Fastify from 'fastify';
+import { describe, it, expect, test } from "@jest/globals";
 
-describe('Register company', () => {
-  /**
-   * Deve ser capaz de cadastrar uma nova empresa
-   */
-  it('should be able to create new company', async () => {
-    const app = Fastify({
-      logger: false
-    })
+import Fastify from "fastify";
+import { PrismaCompanyRepository } from "../repositories/prisma/PrismaCompanyRepository";
 
-    const repository = new PrismaCompanyRepository()
-    // const controller = new CompanyController(repository)
+const app = Fastify({
+  logger: false,
+});
 
-    const company = {
-      "name": "GRUPO TECH TED",
-      "quantityEmployee": "20",
-      "email": "grupotected@com.br",
-      "cep": "08022450",
-      "phone": "21 97467-9010",
-      "city": "Sao Paulo",
-      "road": "Rua Doze de julho",
-      "state": "SP",
-      "cnpj": "0018166018"
-    }
+describe("Register company", () => {
+  const instanceCompany = {
+    name: "",
+    cnpj: "",
+    quantityEmployee: "",
+    email: "",
+    cep: "",
+    phone: "",
+    city: "",
+    road: "",
+    state: "",
+  };
 
-    // const newCompany = await controller.create(company)
+  const data = {
+    name: "TESTE ok",
+    quantityEmployee: "23",
+    email: "cubo@devcast.com.br",
+    cep: "08022450",
+    phone: "(11) 9100-0010",
+    city: "Sao Paulo",
+    road: "Rua TRezentos e dois",
+    state: "SP",
+    cnpj: "11111111111111",
+    description_text: ''
+  };
 
-    expect(company).not.toBeNull()
-  })
+  const validateEmail = (email: any) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
 
-  // it('Object has contain todo params', async () => {
-  //   //  console.log(company)
-  //   // expect(company).not.toBeNull()
-  // })
-})
+  it("Check CNPJ exists in other company", async () => {
+    const newCompany = new PrismaCompanyRepository();
+    const expectedValue = await newCompany.checkCnpj(data);
+    expect(expectedValue).toBeFalsy();
+  });
+
+  it("Check CNPJ is valid", () => {
+    expect(data["cnpj"]).toHaveLength(14);
+  });
+
+  it("Check phone number is valid", () => {
+    expect(data["phone"]).toContain("-");
+  });
+
+  it("Check email is valid ", () => {
+    expect(validateEmail(data["email"])).toBeTruthy();
+  });
+});

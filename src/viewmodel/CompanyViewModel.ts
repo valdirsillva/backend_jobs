@@ -12,7 +12,7 @@ export class CompanyViewModel {
     return this.companyModel.getCompanies();
   }
 
-  public  create(data: Company) {
+  public create(data: Company) {
     return this.companyModel.save(data);
   }
 }

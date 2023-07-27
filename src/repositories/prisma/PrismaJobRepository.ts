@@ -1,26 +1,18 @@
 import { prisma } from "../../views/lib/prisma";
-import { JobProps, JobRepository } from "../JobRepository";
+import { JobProps, JobRepository, Jobs } from "../JobRepository";
 
 export class PrismaJobRepository implements JobRepository {
-  async create(data: JobProps): Promise<JobProps | {} > {    
+  async create(jobData: JobProps): Promise<JobProps | {} > {    
+
     const job = await prisma.job.create({
       data: {
-        title:  data.title,
-        company: {
-          connect: {
-            id: data.companyId
-          },
-        },
-        
-        jobQuantity: data.jobQuantity,
-        stacks: data.stacks,
+        ...jobData
       },
-
     })
     return job
   }
 
-  async getAll() {
+  async getAll(): Promise<Jobs | []> {
     const jobs = await prisma.job.findMany()
     return { jobs: jobs }
   }
