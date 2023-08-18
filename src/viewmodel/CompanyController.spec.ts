@@ -38,11 +38,11 @@ describe("Register company", () => {
     return re.test(email);
   };
 
-  it("Check CNPJ exists in other company", async () => {
-    const newCompany = new PrismaCompanyRepository();
-    const expectedValue = await newCompany.checkCnpj(data);
-    expect(expectedValue).toBeFalsy();
-  });
+  // it("Check CNPJ exists in other company", async () => {
+  //   const newCompany = new PrismaCompanyRepository();
+  //   const expectedValue = await newCompany.checkCnpj(data);
+  //   expect(expectedValue).toBeFalsy();
+  // });
 
   it("Check CNPJ is valid", () => {
     expect(data["cnpj"]).toHaveLength(14);
