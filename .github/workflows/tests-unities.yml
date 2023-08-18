@@ -22,7 +22,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Rodar os testes de unidade com JEST 
-      - run: npm test    
+        run: npm test    
 
 
 
