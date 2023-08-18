@@ -1,15 +1,15 @@
 
-export class UserViewModel {
-  private userModel: User;
+// export class UserViewModel {
+//   private userModel: User;
 
-  constructor() {
+//   constructor() {
    
-  }
+//   }
 
-  public get() {
-  }
+//   public get() {
+//   }
 
-  public create() {
+//   public create() {
    
-  }
-}
+//   }
+// }
