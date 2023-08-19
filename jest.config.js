@@ -4,6 +4,6 @@ module.exports = {
   setupFiles: ['dotenv/config'],
   transformIgnorePatterns: [
     '/node_modules/', // padrão padrão para ignorar node_modules
-    '/dist/', // adiciona esta linha para ignorar a pasta dist
+    './dist/', // adiciona esta linha para ignorar a pasta dist
   ],
 };
