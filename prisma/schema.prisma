@@ -29,14 +29,15 @@ model Job {
   job_title     String
   job_companyId Int
   job_quantity  String
+  technologies  String
+  salary        String
+  modality      String
+  seniority     String
+  requirements  String
+  details       String
   company       Company @relation(fields: [job_companyId], references: [id])
-  technologies  String // linguagens de programação
-  salary        String // salario 
-  modality      String // modalidade
-  seniority     String // senioridade
-  requirements  String // requisitos
-  details       String // detalhes da vaga
 
+  @@index([job_companyId], map: "jobs_job_companyId_fkey")
   @@map("jobs")
 }
 
@@ -45,6 +46,7 @@ model User {
   email          String  @unique
   password       String
   password_reset String?
+  name           String
 
   @@map("users")
 }

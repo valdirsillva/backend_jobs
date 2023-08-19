@@ -6,7 +6,7 @@ import { CompanyView } from '../CompanyView';
 import { JobView } from '../../views/JobView'
 import { CompanyViewModel } from "../../viewmodel/CompanyViewModel";
 
-export async function routes(app: FastifyInstance) {
+export async function company(app: FastifyInstance) {
   const instanceCompany = {
     name: '',
     cnpj: '',
@@ -17,7 +17,7 @@ export async function routes(app: FastifyInstance) {
     city: '',
     road: '',
     state: '',
-    description_text: ''    
+    description_text: ''
   }
 
   const instanceJob = {
@@ -31,7 +31,7 @@ export async function routes(app: FastifyInstance) {
     requirements: '',
     details: '',
   }
-  const companyModel = new CompanyModel(instanceCompany) 
+  const companyModel = new CompanyModel(instanceCompany)
   const controllerCompany = new CompanyViewModel(companyModel)
   const viewCompany = new CompanyView(controllerCompany)
 

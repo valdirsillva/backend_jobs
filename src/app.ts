@@ -1,16 +1,18 @@
-// import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv'
 import Fastify from "fastify";
-import { routes } from './views/routes/company.route';
+import { company } from './views/routes/company.route';
 import cors from '@fastify/cors'
+import { userRouter } from './views/routes/user.route';
 
-// dotenv.config()
+dotenv.config()
 const app = Fastify({
   logger: false
 })
 
 app.register(cors)
 // Register routes
-app.register(routes)
+app.register(company)
+app.register(userRouter)
 
 app.listen({ port: 8888 }, (err, address) => {
   if (err) {

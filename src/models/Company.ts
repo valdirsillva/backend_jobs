@@ -13,8 +13,6 @@ export interface CompanyProps {
   description_text: string;
 }
 
-
-
 export class CompanyModel {
   private props: CompanyProps;
 
@@ -23,7 +21,7 @@ export class CompanyModel {
   constructor(props: CompanyProps) {
     this.repositoryCompany = new PrismaCompanyRepository()
 
-    this.props = { ... props }
+    this.props = { ...props }
   }
 
   public set name(name: string) {
@@ -38,31 +36,31 @@ export class CompanyModel {
     this.props.email = email;
   }
 
-  public set cep(cep: string){
+  public set cep(cep: string) {
     this.props.cep = cep;
   }
 
-  public set phone(phone: string){
+  public set phone(phone: string) {
     this.props.phone = phone;
   }
 
-  public set city(city: string){
+  public set city(city: string) {
     this.props.city = city;
   }
 
-  public set state(state: string){
+  public set state(state: string) {
     this.props.state = state;
   }
 
-  public set road(road: string){
+  public set road(road: string) {
     this.props.road = road;
   }
 
-  public set cnpj(cnpj: string){
+  public set cnpj(cnpj: string) {
     this.props.cnpj = cnpj;
   }
 
-  public set description_text(description_text: string){
+  public set description_text(description_text: string) {
     this.props.description_text = description_text;
   }
 
@@ -76,33 +74,33 @@ export class CompanyModel {
 
   public get email() {
     return this.props.email;
-  } 
-
-  public get cep(){
-   return this.props.cep;
   }
 
-  public get phone(){
+  public get cep() {
+    return this.props.cep;
+  }
+
+  public get phone() {
     return this.props.phone;
   }
 
-  public get city(){
+  public get city() {
     return this.props.city;
   }
 
-  public get state(){
+  public get state() {
     return this.props.state;
   }
 
-  public get road(){
+  public get road() {
     return this.props.road;
   }
 
-  public get cnpj(){
+  public get cnpj() {
     return this.props.cnpj;
   }
 
-  public get description_text(){
+  public get description_text() {
     return this.props.description_text;
   }
 
