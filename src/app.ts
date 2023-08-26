@@ -1,16 +1,29 @@
 import * as dotenv from 'dotenv'
-import Fastify from "fastify";
-import { company } from './views/routes/company.route';
 import cors from '@fastify/cors'
+import Fastify from "fastify";
+import { auth } from './views/routes/auth.route';
+import { company } from './views/routes/company.route';
 import { userRouter } from './views/routes/user.route';
+import { authMiddleware } from './middleware/auth.middleware';
+
+import fastifyJwt from '@fastify/jwt';
 
 dotenv.config()
+
 const app = Fastify({
   logger: false
 })
 
+app.register(fastifyJwt, {
+  secret: 'meutokensecreto'
+})
+
+app.decorate('authenticate', authMiddleware);
+
 app.register(cors)
+
 // Register routes
+app.register(auth)
 app.register(company)
 app.register(userRouter)
 

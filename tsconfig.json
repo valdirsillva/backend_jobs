@@ -101,6 +101,7 @@
   "include": [
     "./src/**/*.ts",
     "modules.d.ts",
+    "fastify-custom.d.ts",
     "./src/**/*.spec.ts"
   ],
   "exclude": [
