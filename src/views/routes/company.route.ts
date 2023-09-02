@@ -40,10 +40,10 @@ export async function company(app: FastifyInstance) {
   const viewJob = new JobView(controllerJob)
 
   app.get('/companies', viewCompany.get.bind(viewCompany))
-  app.post('/companies/create', viewCompany.create.bind(viewCompany))
+  app.post('/companies', viewCompany.create.bind(viewCompany))
 
   app.get('/jobs', viewJob.get.bind(viewJob))
-  app.post('/job/create', viewJob.create.bind(viewJob))
+  app.post('/jobs', viewJob.create.bind(viewJob))
 
   return app;
 

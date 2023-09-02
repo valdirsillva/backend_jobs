@@ -15,7 +15,7 @@ export function userRouter(app: FastifyInstance) {
     const viewUser = new UserView(controllerUser)
 
     app.get("/candidates", viewUser.get.bind(viewUser))
-    app.post("/candidate", viewUser.create.bind(viewUser))
+    app.post("/candidates", viewUser.create.bind(viewUser))
 
     return app;
 
