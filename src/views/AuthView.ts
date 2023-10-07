@@ -35,13 +35,20 @@ export class AuthView {
             const data = await this.viewModelAuth.login(user)
             const response = data as AuthResponse
 
-            const hasUser = await this.validateUser(response, user, reply)
-
-            if (hasUser) {
-                const token = this.generateTokenJwt(response, user);
-                return { auth: true, token: token };
+            if (response == null) {
+                return reply.code(400).send({
+                    message: 'Usuário ou senha inválidos'
+                })
             }
 
+            const hasUser = bcrypt.compareSync(user.password, response.password);
+
+            if (hasUser === false) {
+                return reply.code(401).send({ message: 'Credenciais inválidas!' })
+            }
+
+            const token = this.generateTokenJwt(response, user);
+            return { auth: true, token };
         } catch (err) {
             console.error(err)
             reply.code(500).send({
@@ -50,30 +57,21 @@ export class AuthView {
         }
     }
 
-    private async validateUser(response: AuthResponse, user: Auth, reply: FastifyReply) {
-        const { password } = response;
+    // private async validateUser(response: AuthResponse, user: Auth, reply: FastifyReply) {
+    //     const { password } = response;
+    //     const hasPassword = await bcrypt.compare(user.password, password)
 
-        const hasPassword = await bcrypt.compare(user.password, password)
-
-        if (hasPassword == false) {
-            reply.code(401).send({ message: 'Credenciais inválidas!' })
-            return false
-        }
-
-        return true
-    }
+    //     if (hasPassword === false) {
+    //         return reply.code(401).send({ message: 'Credenciais inválidas!' })
+    //         // return false
+    //     }
+    //     return true
+    // }
 
     private generateTokenJwt(response: AuthResponse, user: Auth) {
         const { id, name, email } = response;
 
-        const jwtPayload = { id, name, email }
-        const jwtOptions = { expiresIn: 86360 }
-        const codeSecret: string = "meucodigosecreto";
-
-        // Gerar um token JWT
-        const token = app.jwt.sign({
-            jwtPayload, codeSecret, jwtOptions
-        })
+        const token = app.jwt.sign({ id, name, email }, { expiresIn: '1h' })
 
         return token;
     }

@@ -1,4 +1,5 @@
 import { UserViewModel } from "../viewmodel/UserViewModel";
+import bcrypt from "bcryptjs";
 
 export class UserView {
     private userViewModel: UserViewModel;
@@ -19,8 +20,14 @@ export class UserView {
 
     public async create(request: any, reply: any) {
         try {
-            const body = request.body;
-            const data = await this.userViewModel.create(body);
+            const { email, name, password } = request.body;
+            const saltRounds = 10;
+            const hash = bcrypt.hashSync(password, saltRounds);
+
+            const data = await this.userViewModel.create({
+                email, name, password: hash
+            });
+
             reply.code(201).send(data);
         } catch (err) {
             console.error(err);
