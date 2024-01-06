@@ -22,7 +22,7 @@ export async function company(app: FastifyInstance) {
 
   const instanceJob = {
     job_title: '',
-    job_companyId: 0,
+    job_companyId: '',
     job_quantity: '',
     technologies: '',
     salary: '',

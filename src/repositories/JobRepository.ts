@@ -1,7 +1,7 @@
 
 export interface JobProps {
   job_title: string;
-  job_companyId: number;
+  job_companyId: string;
   job_quantity: string;
   technologies: string;
   salary: string;

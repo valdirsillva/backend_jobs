@@ -10,7 +10,7 @@ interface Auth {
 }
 
 interface AuthResponse {
-    id: number;
+    id: string;
     name: string;
     email: string;
     password: string;
@@ -29,7 +29,7 @@ export class AuthView {
             const user = request.body as Auth
 
             if (user.email === '' || user.password === '') {
-                reply.code(404).send({ message: 'Login ou senha devem ser preenchidos!' })
+                reply.code(404).send({ message: 'Login e senha devem ser preenchidos.' })
             }
 
             const data = await this.viewModelAuth.login(user)
@@ -37,14 +37,14 @@ export class AuthView {
 
             if (response == null) {
                 return reply.code(400).send({
-                    message: 'Usuário ou senha inválidos'
+                    message: 'Login ou senha inválidos'
                 })
             }
 
             const hasUser = bcrypt.compareSync(user.password, response.password);
 
             if (hasUser === false) {
-                return reply.code(401).send({ message: 'Credenciais inválidas!' })
+                return reply.code(401).send({ message: 'Login ou senha inválidos.' })
             }
 
             const token = this.generateTokenJwt(response, user);

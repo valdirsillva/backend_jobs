@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Company {
-  id               Int     @id @default(autoincrement())
+  id               String  @id @default(uuid())
   name             String?
   cnpj             String  @unique
   quantityEmployee String?
@@ -25,9 +25,9 @@ model Company {
 }
 
 model Job {
-  id            Int     @id @default(autoincrement())
+  id            String  @id @default(uuid())
   job_title     String
-  job_companyId Int
+  job_companyId String
   job_quantity  String
   technologies  String
   salary        String
@@ -37,12 +37,11 @@ model Job {
   details       String
   company       Company @relation(fields: [job_companyId], references: [id])
 
-  @@index([job_companyId], map: "jobs_job_companyId_fkey")
   @@map("jobs")
 }
 
 model User {
-  id             Int     @id @default(autoincrement())
+  id             String  @id @default(uuid())
   email          String  @unique
   password       String
   password_reset String?

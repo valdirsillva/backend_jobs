@@ -2,7 +2,7 @@ import { PrismaJobRepository } from "../repositories/prisma/PrismaJobRepository"
 
 export interface JobProps {
   job_title: string;
-  job_companyId: number;
+  job_companyId: string;
   job_quantity: string;
   technologies: string;
   salary: string;
@@ -28,9 +28,9 @@ export class JobModel {
 
   public set tecnologies(tecnologies: string) {
     this.props.technologies = tecnologies;
-  } 
+  }
 
-  public set jobCompanyId(companyId: number) {
+  public set jobCompanyId(companyId: string) {
     this.props.job_companyId = companyId;
   }
 
@@ -64,7 +64,7 @@ export class JobModel {
 
   public get tecnologies() {
     return this.props.technologies;
-  } 
+  }
 
   public get jobCompanyId() {
     return this.props.job_companyId;
